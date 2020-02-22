@@ -94,9 +94,36 @@ class IhmFunction(QDialog):
         self.pushConsult.clicked.connect(self.consultRentBottle)
         self.pushReturn.clicked.connect(self.returnBottle)
 
-    #def returnBottle(self):
+    def returnBottle(self):
 
-     #   if (len(self.loginUser) != 0):
+        if (len(self.loginUser) != 0):
+            selection=self.listWidgetRenter.currentItem()
+            #vérifie le format de la selection pour éviter le bug si c'est vide
+            if isinstance(selection,QListWidgetItem)==True:
+                #passage d'une variable QListWidgetItem à une chaine de caractère puis à une liste
+                selection=selection.text()
+                selection = selection.rstrip('\n')
+                selectionList = selection.split("\t| ")
+                bottleName = selectionList[1]
+
+                if(selectionList[0] =="Beer"):
+                    for i in self.Belge:
+                        if bottleName == i.Code:
+                            #modifie les valeurs enregistrer pour cette reférence par les nouvelles
+                            i.disponible = "available"
+                            affichage(self,Belge,bordeau)
+                            enregistrer(self)
+                            break
+                else:
+                    for i in self.bordeau:
+                        if bottleName == i.Code:
+                            #modifie les valeurs enregistrer pour cette reférence par les nouvelles
+                            i.disponible = "available"
+                            affichage(self,Belge,bordeau)
+                            enregistrer(self)
+                            break
+        self.consultRentBottle()
+
 
 
     def consultRentBottle(self):

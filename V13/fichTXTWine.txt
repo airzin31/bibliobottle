@@ -1,6 +1,4 @@
-Bottle Name	| Country	| Region	| Quantity 	| Domain	| Year	| Tanin Strength  1	| Red
-cuve1	| france	| bordeau	| 2	| bougeois	| 2018	| Tanin Strength  3	| Red
-Les ormes de Cambras	| france	| pays d'oc	| 6	| Cabernet sauvignon	| 2018	| Tanin Strength  3	| Red
-Calvaire	| france	| saint-emilion	| 6	| chateau du calvaire	| 2016	| Tanin Strength  4	| Red
-Lagarenne	| france	| gironde	| 6	| chateau Lagarenne	| 2016	| Tanin Strength  4	| Red
-La francette	| france	| gironde	| 6	| Merlot	| 2016	| Tanin Strength  2	| Red
+Bottle Name	| Country	| Region	| Quantity 	| Domain	| Year	| Tanin Strength  1	| Red	| available
+Bot1	| Country	| Region	| Quantity 	| Domain	| Year	| Tanin Strength  1	| Red	| Last Name
+Bot12	| Country	| Region	| Quantity 	| Domain	| Year	| Tanin Strength  1	| Red	| available
+Bot123	| Country	| Region	| Quantity 	| Domain	| Year	| Tanin Strength  1	| Red	| available
