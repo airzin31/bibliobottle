@@ -10,22 +10,22 @@ class Bottle:
         self.Country=Country
         self.Region=Region
         self.Quantity=Quantity
-        
+
     def CaracteristiqueBottle(self):
         print("The bottle:{} Country:{} Region:{} Qty:{}".format(self.Code,self.Country,self.Region,self.Quantity))
-        
+
 bordeau=Bottle(33001,"France","Bordeau",21)
 bordeau.CaracteristiqueBottle()
-        
+
 class Beer(Bottle):
     def __init__(self,Code,Country,Region,Quantity,Aroma,Savor,ColorB):
         super().__init__(Code,Country,Region,Quantity)
         self.Savor = Savor
         self.Aroma = Aroma
         self.ColorB = ColorB
-        
+
     def CaracteristiqueBeer(self):
-          # Appel de la méthode de la classe Mère
+        # Appel de la méthode de la classe Mère
         print("Beer:{} Country:{} Region:{} Color:{} Aroma:{} Savor:{} Qty:{}".format(self.Code,self.Country,self.Region,self.ColorB,self.Aroma,self.Savor,self.Quantity))
 
 Belge=Beer(12,"Belge","Bruxelle",999,"Café","Caramel","Blonde")
@@ -38,7 +38,7 @@ class Wine(Bottle):
         self.Year = Year
         self.ColorW = ColorW
         self.Tanin = Tanin
-        
+
     def CaracteristiqueWine(self):
         print("Wine:{} Country:{} Region:{} Domain:{} Color:{} Year:{} Tanin Strength:{} Qty:{} ".format(self.Code,self.Country,self.Region,self.Domain,self.ColorW,self.Year,self.Tanin,self.Quantity))
 
@@ -51,31 +51,36 @@ class Personne:
         self.prenom = prenom
         self.country = country
         self.year = year
-        
+
     def sePresenter(self):
         print("Je m'appelle {} {}, je viens de {}, né en {}.".format(self.prenom,self.nom,self.country,self.year))
 
 Ludo=Personne("SINmammmmmammamaSE","Ludovic","France","1986")
-Ludo.sePresenter() 
+Ludo.sePresenter()
 
 
 
 class IhmFunction(QDialog):
     def __init__(self):
         super().__init__()
-        loadUi('StockBarV13.ui',self)
+        loadUi('StockBarV14.ui',self)
         self.Belge =[]
-        self.Connection=[]
         self.bordeau=[]
+        self.loginUser=[]
         ouvrir(self,Belge,bordeau)
         affichage(self,Belge,bordeau)
-        
+
         self.listWidgetRef.clicked.connect(self.Select)
         self.pbSaveSub.clicked.connect(self.SaveSub)
-        self.bottonConnectionSub.clicked.connect(self.Connection)
         self.pbDisconnect.clicked.connect(self.Disconnect)
         self.pbModify.clicked.connect(self.Modify)
+        self.bottonConnectionSub.clicked.connect(self.Connection)
+
         #self.bpbPickUpDis.clicked.connect(self.BPickUp)
+        #rent wine button
+        self.pushButtonpicking_2.clicked.connect(self.rentWine)
+        #rent beer button
+        self.pushButtonpicking.clicked.connect(self.rentBeer)
         self.pbBeerSort.clicked.connect(self.SortBeer)
         self.pbWineSort.clicked.connect(self.SortWine)
         self.pbWineSearch.clicked.connect(self.WSearch)
@@ -85,36 +90,38 @@ class IhmFunction(QDialog):
         self.pbNewRef.clicked.connect(self.New)
         self.deleteButton.clicked.connect(self.Delete)
 
-    def Connection(self):
-        login = self.LastNameSubConnection.text()
+    def rentBeer(self):
+        if (len(self.loginUser) != 0):
 
-        file1 = open('fichTxtPers.txt','r+')
-        print(login)
-        dejaExistant = False
-        for i in file1:
-            i = i.rstrip('\n')
-            temp = i.split("\t| ")
-            if temp[0]==login :
-                dejaExistant=True
-                self.existing.setText("Bienvenu {}", login)
-                self.loginName.setText(login)
-        if(!dejaExistant):
-            self.Connection = login
+            selection=self.BeerList.currentItem()
+            #vérifie le format de la selection pour éviter le bug si c'est vide
+            if isinstance(selection,QListWidgetItem)==True:
+                #passage d'une variable QListWidgetItem à une chaine de caractère puis à une liste
+                selection=selection.text()
+                selection = selection.rstrip('\n')
+                selectionList = selection.split("\t| ")
 
 
-        file1.close()
+    def rentWine(self):
+        if (len(self.loginUser) != 0):
+
+            selection=self.WineList.currentItem()
+            #vérifie le format de la selection pour éviter le bug si c'est vide
+            if isinstance(selection,QListWidgetItem)==True:
+                #passage d'une variable QListWidgetItem à une chaine de caractère puis à une liste
+                selection=selection.text()
+                selection = selection.rstrip('\n')
+                seletcionList = selection.split("\t| ")
 
 
     def SaveSub(self):
+        file1 = open('fichTxtPers.txt','a')
         self.persAlready.setText("")
         print(self.FirstNameSub.text())
         pers = Personne(self.FirstNameSub.text(),self.LastNameSub.text(),self.CountrySub.text(),self.YearSub.text())
         print ( pers.sePresenter())
-
-        file1 = open('fichTxtPers.txt','a')
-        file1.close
         file1 = open('fichTxtPers.txt','r+')
-        
+
         dejaExistant=False
         for i in file1:
             i = i.rstrip('\n')
@@ -122,28 +129,46 @@ class IhmFunction(QDialog):
             if temp[0]==self.LastNameSub.text():
                 dejaExistant=True
                 self.persAlready.setText("Already Exist")
-               
+
                 print("déja existant")
         if not dejaExistant:
-            
+
             file1.write("{}\t| {}\t| {}\t| {}\n".format(pers.prenom,pers.nom,pers.country,pers.year))
+            self.persAlready.setText("well recorded")
         file1.close
-        
-        
-        
+
+
+
         #█conn = sqlite3.connect("maBD.bd")
         #fichiertPers = open('fichTxtPers.txt','w')
         #person1 = pers.sePresenter()
         #print ( person1)
-        
-        
+
+
         #☺file1.write('helloooooo \n, fgfdgfdgfdgfdgf\n')
         #file1.write(str(person1))
         #file1.close()
         #fichiertPers = close('fichTxtPers.txt','a')
 
-             
-    
+    def Connection(self):
+        login = self.LastNameSubConnection.text()
+
+        file1 = open('fichTxtPers.txt','r+')
+        print("login" + login)
+        dejaExistant = False
+        for i in file1:
+            i = i.rstrip('\n')
+            temp = i.split("\t| ")
+            if temp[0]==login :
+                dejaExistant=True
+                self.persAlready.setText("Bienvenu " + login)
+                self.loginName.setText(login)
+        if(not dejaExistant):
+            self.loginUser = login
+
+
+        file1.close()
+
     def SortWine(self):
         TempWine=self.bordeau
         if self.comboBoxWine.currentText()=="Bottle Name":
@@ -164,8 +189,8 @@ class IhmFunction(QDialog):
             TempWine=sorted(self.bordeau, key=lambda Wine: Wine.ColorW)
         self.bordeau=TempWine
         affichage(self,Belge,bordeau)
-        
-    
+
+
     def SortBeer(self):
         TempBeer=self.Belge
         if self.comboBoxBeer.currentText()=="Bottle Name":
@@ -184,20 +209,21 @@ class IhmFunction(QDialog):
             TempBeer=sorted(self.Belge, key=lambda Beer: Beer.ColorB)
         self.Belge=TempBeer
         affichage(self,Belge,bordeau)
-        
-        
-        
+
+
+
     def SearchSub(self):
         print("SearchSub")
-        
+
     def Register(self):
         print("Register")
-        
+
     def Disconnect(self):
-        self.Connection = []
-        self.loginName.setText("")
+        self.loginUser = []
+        self.loginName.setText("Vous n'êtes pas connecté.")
+        self.persAlready.setText("")
         print("disconnect")
-        
+
     def BSearch(self):
         self.BeerList.clear()
         #recherche par bottle name
@@ -241,7 +267,7 @@ class IhmFunction(QDialog):
         #retourne à l'affichage sans recherche
         elif self.comboBoxBeer.currentText()=="None":
             affichage(self,Belge,bordeau)
-                
+
     def WSearch(self):
         self.WineList.clear()
         #recherche par bottle name
@@ -266,7 +292,7 @@ class IhmFunction(QDialog):
             for p in self.bordeau:
                 if self.wColorDis.currentText()==p.ColorW:
                     self.WineList.addItem("Wine\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW))
-        
+
         #recherche par Domain
         elif self.comboBoxWine.currentText()=="Domain":
             for p in self.bordeau:
@@ -315,7 +341,7 @@ class IhmFunction(QDialog):
                     self.YearRef.setText(p.Year)
                     self.TaninRef.setCurrentText(p.Tanin)
                     self.wColorRef.setCurrentText(p.ColorW)
-            
+
         elif selectionList[0]=="Beer":
             #recherche la valeur selectionner dans la liste des bières et renseigne ses caratéristiques associées
             for i in self.Belge:
@@ -327,7 +353,7 @@ class IhmFunction(QDialog):
                     self.AromaRef.setText(i.Aroma)
                     self.SavorRef.setText(i.Savor)
                     self.bColorRef.setCurrentText(i.ColorB)
-            
+
     def Modify(self):
         #recherche si la référence est presente dans les bières
         for i in self.Belge:
@@ -341,7 +367,7 @@ class IhmFunction(QDialog):
                 i.ColorB=self.bColorRef.currentText()
                 affichage(self,Belge,bordeau)
                 enregistrer(self)
-                
+
         #idem dans les vins
         for p in self.bordeau:
             if self.CodeRef.text()==p.Code:
@@ -354,10 +380,10 @@ class IhmFunction(QDialog):
                 p.ColorW=self.wColorRef.currentText()
                 affichage(self,Belge,bordeau)
                 enregistrer(self)
-                
-                
-                
-                
+
+
+
+
     def Search(self):
         self.listWidgetRef.clear()
         #recherche par Bottle Name
@@ -398,27 +424,27 @@ class IhmFunction(QDialog):
         #retourne à l'affichage sans recherche
         if self.comboBoxSearchRef.currentText()=="None":
             affichage(self,Belge,bordeau)
- 
-        
+
+
     def Return(self):
         print("return")
         if self.WineBeerRef.currentText() =="Wine":
             print("wine")
         elif self.WineBeerRef.currentText() =="Beer":
             print("beer")
-            
+
     def New(self):
         self.existing.setText("")
         fichiertBeer = open('fichTxtBeer.txt','r+')
         fichiertWine = open('fichTXTWine.txt','r+')
-        
+
         bottleName= self.CodeRef.text()
         print(bottleName)
-        
+
         dejaExistant=False
-        
+
         if self.WineBeerRef.currentText() =="Wine":
-            
+
             for i in fichiertWine:
                 i = i.rstrip('\n')
                 temp = i.split("\t| ")
@@ -426,50 +452,50 @@ class IhmFunction(QDialog):
                     print("déja existant")
                     dejaExistant=True
                     self.existing.setText("Already Exist")
- 
+
 
             if not dejaExistant:
                 Wine_c(self,Belge,bordeau)
-                
+
         elif self.WineBeerRef.currentText() =="Beer":
-            
+
             for i in fichiertBeer:
                 i = i.rstrip('\n')
                 temp = i.split("\t| ")
                 if temp[0]==bottleName :
                     dejaExistant=True
                     self.existing.setText("Already Exist")
-                    
-                    
-                    print("déja existant")
-            
-            
 
-            
+
+                    print("déja existant")
+
+
+
+
             if not dejaExistant:
-                          
-               Beer_c(self,Belge)
-               
-               
+
+                Beer_c(self,Belge)
+
+
         affichage(self,Belge,bordeau)
         enregistrer(self)
         fichiertBeer.close
         fichiertWine.close
-        
-        
+
+
 
     def Delete(self):
-        
+
         #selection de la valeur de la liste à supprimer par un clic dans la liste affichée
         selection=self.listWidgetRef.currentItem()
         #vérifie le format de la selection pour éviter le bug si c'est vide
         if isinstance(selection,QListWidgetItem)==True:
-        #passage d'une variable QListWidgetItem à une chaine de caractère puis à une liste
+            #passage d'une variable QListWidgetItem à une chaine de caractère puis à une liste
             selection=selection.text()
             selection = selection.rstrip('\n')
             selectionList = selection.split("\t| ")
 
-        #recherche si c'est du vin ou de la bière et efface dans la bonne variable
+            #recherche si c'est du vin ou de la bière et efface dans la bonne variable
             if selectionList[0]=="Wine":
                 for p in self.bordeau:
                     if selectionList[1]==p.Code:
@@ -482,7 +508,7 @@ class IhmFunction(QDialog):
         #affiche la liste apres modification puis sauvegarde cette modification
         affichage(self,Belge,bordeau)
         enregistrer(self)
-                
+
 
 
 def Wine_c(self,Belge,bordeau):
@@ -506,10 +532,11 @@ def enregistrer(self):
         fichiertWine.write("{}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW))
     fichiertBeer.close
     fichiertWine.close
-    
-    
+
+
+
 def ouvrir(self,Belge,bordeau):
-    
+
     fichiertBeer = open('fichTxtBeer.txt','a')
     fichiertBeer.close
     fichiertBeer = open('fichTxtBeer.txt','r')
@@ -537,7 +564,7 @@ def affichage(self,Belge,bordeau):
             self.listWidgetRef.addItem("Beer\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(i.Code,i.Country,i.Region,i.Quantity,i.Aroma,i.Savor,i.ColorB))
     for p in self.bordeau:
         self.listWidgetRef.addItem("Wine\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW))
-    
+
     #affichage dans Customer Wine
     self.WineList.clear()
     if len(self.bordeau)!=0:
@@ -549,8 +576,8 @@ def affichage(self,Belge,bordeau):
     if len(self.Belge)!=0:
         for i in self.Belge:
             self.BeerList.addItem("Beer\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(i.Code,i.Country,i.Region,i.Quantity,i.Aroma,i.Savor,i.ColorB))
-    
-        
+
+
 
 
 

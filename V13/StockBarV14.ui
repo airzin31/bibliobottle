@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1105</width>
-    <height>480</height>
+    <height>516</height>
    </rect>
   </property>
   <property name="mouseTracking">
@@ -31,10 +31,10 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>30</x>
      <y>30</y>
      <width>1031</width>
-     <height>401</height>
+     <height>411</height>
     </rect>
    </property>
    <property name="sizeIncrement">
@@ -62,7 +62,7 @@
     <enum>QTabWidget::Triangular</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -77,19 +77,6 @@
     <attribute name="title">
      <string>Subscribe</string>
     </attribute>
-    <widget class="QPushButton" name="pbSaveSub">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>40</y>
-       <width>131</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
     <widget class="QWidget" name="verticalLayoutWidget_2">
      <property name="geometry">
       <rect>
@@ -133,43 +120,102 @@
       </item>
      </layout>
     </widget>
-    <widget class="QPushButton" name="bottonConnectionSub">
+    <widget class="QTextBrowser" name="textBrowser_9">
      <property name="geometry">
       <rect>
-       <x>320</x>
-       <y>280</y>
-       <width>131</width>
-       <height>51</height>
+       <x>500</x>
+       <y>30</y>
+       <width>471</width>
+       <height>201</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Connection</string>
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/newPrefix/biere vin.jpg&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="LastNameSubConnection">
+    <widget class="QWidget" name="verticalLayoutWidget_11">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>300</y>
-       <width>259</width>
-       <height>20</height>
+       <x>310</x>
+       <y>70</y>
+       <width>121</width>
+       <height>81</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Last Name</string>
+     <layout class="QVBoxLayout" name="verticalLayout_10">
+      <item>
+       <widget class="QPushButton" name="pbSaveSub">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>280</y>
+       <width>261</width>
+       <height>80</height>
+      </rect>
      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QLineEdit" name="LastNameSubConnection">
+        <property name="text">
+         <string>Last Name</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>280</y>
+       <width>251</width>
+       <height>78</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QPushButton" name="bottonConnectionSub">
+        <property name="text">
+         <string>Connection</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pbDisconnect">
+          <property name="text">
+           <string>disconnection</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
     <widget class="QLabel" name="persAlready">
      <property name="geometry">
       <rect>
-       <x>400</x>
-       <y>100</y>
-       <width>111</width>
-       <height>41</height>
+       <x>630</x>
+       <y>290</y>
+       <width>291</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="text">
-      <string/>
+      <string>LLLL</string>
      </property>
     </widget>
    </widget>
@@ -196,7 +242,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
@@ -218,7 +264,7 @@
         <item>
          <widget class="QLineEdit" name="wCodeDis">
           <property name="text">
-           <string>Internal Code</string>
+           <string>Bottle Name</string>
           </property>
          </widget>
         </item>
@@ -310,7 +356,7 @@
       <widget class="QListWidget" name="WineList">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>190</x>
          <y>50</y>
          <width>771</width>
          <height>192</height>
@@ -320,7 +366,7 @@
       <widget class="QTextBrowser" name="textBrowser_6">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>190</x>
          <y>10</y>
          <width>331</width>
          <height>31</height>
@@ -337,10 +383,10 @@ p, li { white-space: pre-wrap; }
       <widget class="QWidget" name="horizontalLayoutWidget_2">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>190</x>
          <y>260</y>
          <width>751</width>
-         <height>41</height>
+         <height>53</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -352,60 +398,66 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBoxWine">
-          <item>
-           <property name="text">
-            <string>Bottle Name</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Country</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Region</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Color</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Domain</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Year</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Tanin</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Quantity</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>None</string>
-           </property>
-          </item>
+         <widget class="QPushButton" name="pushButtonpicking_2">
+          <property name="text">
+           <string>Rent</string>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pbWineSort">
-          <property name="text">
-           <string>Sort</string>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <widget class="QPushButton" name="pbWineSort">
+            <property name="text">
+             <string>Sort</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxWine">
+            <item>
+             <property name="text">
+              <string>Bottle Name</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Country</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Region</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Color</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Aroma</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Savor</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Quantity</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>None</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QPushButton" name="pbCustomerWine">
@@ -437,7 +489,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QLineEdit" name="bCodeDis">
           <property name="text">
-           <string>Internal Code</string>
+           <string>Bottle Name</string>
           </property>
          </widget>
         </item>
@@ -530,7 +582,7 @@ p, li { white-space: pre-wrap; }
          <x>190</x>
          <y>260</y>
          <width>751</width>
-         <height>41</height>
+         <height>53</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -544,60 +596,64 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QPushButton" name="pushButtonpicking">
           <property name="text">
-           <string>borrow</string>
+           <string>Rent</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBoxBeer">
+         <layout class="QVBoxLayout" name="verticalLayout_8">
           <item>
-           <property name="text">
-            <string>Bottle Name</string>
-           </property>
+           <widget class="QPushButton" name="pbBeerSort">
+            <property name="text">
+             <string>Sort</string>
+            </property>
+           </widget>
           </item>
           <item>
-           <property name="text">
-            <string>Country</string>
-           </property>
+           <widget class="QComboBox" name="comboBoxBeer">
+            <item>
+             <property name="text">
+              <string>Bottle Name</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Country</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Region</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Color</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Aroma</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Savor</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Quantity</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>None</string>
+             </property>
+            </item>
+           </widget>
           </item>
-          <item>
-           <property name="text">
-            <string>Region</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Color</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Aroma</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Savor</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Quantity</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>None</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pbBeerSort">
-          <property name="text">
-           <string>Sort</string>
-          </property>
-         </widget>
+         </layout>
         </item>
         <item>
          <widget class="QPushButton" name="pbCustomerBeer">
@@ -620,18 +676,11 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>20</x>
        <y>10</y>
-       <width>151</width>
-       <height>371</height>
+       <width>201</width>
+       <height>191</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QLineEdit" name="CodeRef">
-        <property name="text">
-         <string>Bottle Name</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="QComboBox" name="WineBeerRef">
         <item>
@@ -644,6 +693,13 @@ p, li { white-space: pre-wrap; }
           <string>Beer</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="CodeRef">
+        <property name="text">
+         <string>Bottle Name</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -661,101 +717,6 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="DomainRef">
-        <property name="text">
-         <string>Domain</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="bColorRef">
-        <item>
-         <property name="text">
-          <string>White</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Blonde</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Amber</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="wColorRef">
-        <item>
-         <property name="text">
-          <string>Red</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Pink</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>White</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="TaninRef">
-        <item>
-         <property name="text">
-          <string>Tanin Strength  1</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Tanin Strength  2</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Tanin Strength  3</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Tanin Strength  4</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Tanin Strength  5</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="AromaRef">
-        <property name="text">
-         <string>Aroma</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="SavorRef">
-        <property name="text">
-         <string>Savor</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="YearRef">
-        <property name="text">
-         <string>Year</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLineEdit" name="QuantityRef">
         <property name="text">
          <string>Quantity </string>
@@ -767,9 +728,9 @@ p, li { white-space: pre-wrap; }
     <widget class="QListWidget" name="listWidgetRef">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>290</x>
        <y>10</y>
-       <width>821</width>
+       <width>711</width>
        <height>251</height>
       </rect>
      </property>
@@ -816,10 +777,10 @@ p, li { white-space: pre-wrap; }
     <widget class="QWidget" name="verticalLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>310</y>
-       <width>406</width>
-       <height>27</height>
+       <x>290</x>
+       <y>290</y>
+       <width>711</width>
+       <height>53</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -831,13 +792,6 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="deleteButton">
-        <property name="text">
-         <string>Delete</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="pbModify">
         <property name="text">
          <string>Modify</string>
@@ -845,7 +799,21 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <widget class="QPushButton" name="deleteButton">
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="pbSearchRef">
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QComboBox" name="comboBoxSearchRef">
           <item>
@@ -880,10 +848,125 @@ p, li { white-space: pre-wrap; }
           </item>
          </widget>
         </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="existing">
+        <property name="text">
+         <string>LL</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="formLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>210</y>
+       <width>271</width>
+       <height>102</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <widget class="QPushButton" name="pbSearchRef">
+         <widget class="QComboBox" name="bColorRef">
+          <item>
+           <property name="text">
+            <string>White</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Blonde</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Amber</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="AromaRef">
           <property name="text">
-           <string>Search</string>
+           <string>Aroma</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="SavorRef">
+          <property name="text">
+           <string>Savor</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="1">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QComboBox" name="wColorRef">
+          <item>
+           <property name="text">
+            <string>Red</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Pink</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>White</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="DomainRef">
+          <property name="text">
+           <string>Domain</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="TaninRef">
+          <item>
+           <property name="text">
+            <string>Tanin Strength  1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Tanin Strength  2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Tanin Strength  3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Tanin Strength  4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Tanin Strength  5</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="YearRef">
+          <property name="text">
+           <string>Year</string>
           </property>
          </widget>
         </item>
@@ -891,26 +974,13 @@ p, li { white-space: pre-wrap; }
       </item>
      </layout>
     </widget>
-    <widget class="QLabel" name="existing">
-     <property name="geometry">
-      <rect>
-       <x>840</x>
-       <y>280</y>
-       <width>151</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>LL</string>
-     </property>
-    </widget>
     <zorder>IDWine</zorder>
     <zorder>verticalLayoutWidget_3</zorder>
     <zorder>listWidgetRef</zorder>
     <zorder>label</zorder>
     <zorder>IDBeer</zorder>
     <zorder>verticalLayoutWidget</zorder>
-    <zorder>existing</zorder>
+    <zorder>formLayoutWidget</zorder>
    </widget>
    <widget class="QWidget" name="YourLoans">
     <attribute name="title">
@@ -920,74 +990,50 @@ p, li { white-space: pre-wrap; }
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>130</y>
-       <width>571</width>
-       <height>192</height>
+       <y>91</y>
+       <width>981</width>
+       <height>231</height>
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_5">
+    <widget class="QPushButton" name="pushConsult">
      <property name="geometry">
       <rect>
-       <x>230</x>
-       <y>90</y>
-       <width>75</width>
-       <height>23</height>
+       <x>390</x>
+       <y>30</y>
+       <width>161</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="text">
-      <string>Consult</string>
+      <string>Consult your loans</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QKeySequenceEdit" name="keySequenceEdit_2">
-     <property name="geometry">
-      <rect>
-       <x>300</x>
-       <y>40</y>
-       <width>141</width>
-       <height>31</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser_5">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>40</y>
-       <width>241</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="html">
-      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; color:#ff0000;&quot;&gt;Write your ID for consult you Loans .&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pbDisconnect">
+  <widget class="QLabel" name="loginName">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>440</y>
-     <width>111</width>
-     <height>31</height>
+     <x>400</x>
+     <y>450</y>
+     <width>331</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>disconnection</string>
+    <string>LLLL</string>
    </property>
   </widget>
  </widget>
  <tabstops>
   <tabstop>tabWidget</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../../test image.qrc"/>
+  <include location="test image.qrc"/>
+ </resources>
  <connections/>
 </ui>
