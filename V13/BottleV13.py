@@ -65,12 +65,14 @@ class IhmFunction(QDialog):
         super().__init__()
         loadUi('StockBarV13.ui',self)
         self.Belge =[]
+        self.Connection=[]
         self.bordeau=[]
         ouvrir(self,Belge,bordeau)
         affichage(self,Belge,bordeau)
         
-        self.listWidgetRef.clicked.connect(self.Select)        
+        self.listWidgetRef.clicked.connect(self.Select)
         self.pbSaveSub.clicked.connect(self.SaveSub)
+        self.bottonConnectionSub.clicked.connect(self.Connection)
         self.pbDisconnect.clicked.connect(self.Disconnect)
         self.pbModify.clicked.connect(self.Modify)
         #self.bpbPickUpDis.clicked.connect(self.BPickUp)
@@ -83,11 +85,34 @@ class IhmFunction(QDialog):
         self.pbNewRef.clicked.connect(self.New)
         self.deleteButton.clicked.connect(self.Delete)
 
+    def Connection(self):
+        login = self.LastNameSubConnection.text()
+
+        file1 = open('fichTxtPers.txt','r+')
+        print(login)
+        dejaExistant = False
+        for i in file1:
+            i = i.rstrip('\n')
+            temp = i.split("\t| ")
+            if temp[0]==login :
+                dejaExistant=True
+                self.existing.setText("Bienvenu {}", login)
+                self.loginName.setText(login)
+        if(!dejaExistant):
+            self.Connection = login
+
+
+        file1.close()
+
+
     def SaveSub(self):
         self.persAlready.setText("")
         print(self.FirstNameSub.text())
         pers = Personne(self.FirstNameSub.text(),self.LastNameSub.text(),self.CountrySub.text(),self.YearSub.text())
         print ( pers.sePresenter())
+
+        file1 = open('fichTxtPers.txt','a')
+        file1.close
         file1 = open('fichTxtPers.txt','r+')
         
         dejaExistant=False
@@ -169,6 +194,8 @@ class IhmFunction(QDialog):
         print("Register")
         
     def Disconnect(self):
+        self.Connection = []
+        self.loginName.setText("")
         print("disconnect")
         
     def BSearch(self):
