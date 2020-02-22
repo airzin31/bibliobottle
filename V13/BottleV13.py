@@ -55,7 +55,7 @@ class Personne:
     def sePresenter(self):
         print("Je m'appelle {} {}, je viens de {}, né en {}.".format(self.prenom,self.nom,self.country,self.year))
 
-Ludo=Personne("SINGLARD CAUSSE","Ludovic","France","1986")
+Ludo=Personne("SINmammmmmammamaSE","Ludovic","France","1986")
 Ludo.sePresenter() 
 
 
