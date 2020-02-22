@@ -2,14 +2,16 @@
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 #import sqlite3
+from pandas.core.nanops import bottleneck_switch
 
 
 class Bottle:
-    def __init__(self,Code,Country,Region,Quantity):
+    def __init__(self,Code,Country,Region,Quantity,disponible="available"):
         self.Code = Code
         self.Country=Country
         self.Region=Region
         self.Quantity=Quantity
+        self.disponible = disponible
 
     def CaracteristiqueBottle(self):
         print("The bottle:{} Country:{} Region:{} Qty:{}".format(self.Code,self.Country,self.Region,self.Quantity))
@@ -18,8 +20,8 @@ bordeau=Bottle(33001,"France","Bordeau",21)
 bordeau.CaracteristiqueBottle()
 
 class Beer(Bottle):
-    def __init__(self,Code,Country,Region,Quantity,Aroma,Savor,ColorB):
-        super().__init__(Code,Country,Region,Quantity)
+    def __init__(self,Code,Country,Region,Quantity,Aroma,Savor,ColorB,disponible):
+        super().__init__(Code,Country,Region,Quantity,disponible)
         self.Savor = Savor
         self.Aroma = Aroma
         self.ColorB = ColorB
@@ -28,12 +30,12 @@ class Beer(Bottle):
         # Appel de la méthode de la classe Mère
         print("Beer:{} Country:{} Region:{} Color:{} Aroma:{} Savor:{} Qty:{}".format(self.Code,self.Country,self.Region,self.ColorB,self.Aroma,self.Savor,self.Quantity))
 
-Belge=Beer(12,"Belge","Bruxelle",999,"Café","Caramel","Blonde")
+Belge=Beer(12,"Belge","Bruxelle",999,"Café","Caramel","Blonde","available")
 Belge.CaracteristiqueBeer()
 
 class Wine(Bottle):
-    def __init__(self,Code,Country,Region,Quantity,Domain,Year,Tanin,ColorW):
-        super().__init__(Code,Country,Region,Quantity)
+    def __init__(self,Code,Country,Region,Quantity,Domain,Year,Tanin,ColorW,disponible):
+        super().__init__(Code,Country,Region,Quantity,disponible)
         self.Domain = Domain
         self.Year = Year
         self.ColorW = ColorW
@@ -42,7 +44,7 @@ class Wine(Bottle):
     def CaracteristiqueWine(self):
         print("Wine:{} Country:{} Region:{} Domain:{} Color:{} Year:{} Tanin Strength:{} Qty:{} ".format(self.Code,self.Country,self.Region,self.Domain,self.ColorW,self.Year,self.Tanin,self.Quantity))
 
-GrandCru=Wine(12,"France","Aveyron",69,"Rodez",1986,4,"Red")
+GrandCru=Wine(12,"France","Aveyron",69,"Rodez",1986,4,"Red","available")
 GrandCru.CaracteristiqueWine()
 
 class Personne:
@@ -89,8 +91,35 @@ class IhmFunction(QDialog):
         #self.pbCustomerRef.clicked.connect(self.Return)
         self.pbNewRef.clicked.connect(self.New)
         self.deleteButton.clicked.connect(self.Delete)
+        self.pushConsult.clicked.connect(self.consultRentBottle)
+        self.pushReturn.clicked.connect(self.returnBottle)
+
+    #def returnBottle(self):
+
+     #   if (len(self.loginUser) != 0):
+
+
+    def consultRentBottle(self):
+
+        self.listWidgetRenter.clear()
+        if (len(self.loginUser) != 0):
+            #affichage dans Customer Wine
+            if len(self.bordeau)!=0:
+                for p in self.bordeau:
+                    print(str(p))
+                    if p.disponible == str(self.loginUser):
+                        self.listWidgetRenter.addItem("Wine\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW,p.disponible))
+
+            #affichage dans Customer Beer
+            if len(self.Belge)!=0:
+                for i in self.Belge:
+                    print(str(i))
+                    if i.disponible == str(self.loginUser):
+                        self.listWidgetRenter.addItem("Beer\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(i.Code,i.Country,i.Region,i.Quantity,i.Aroma,i.Savor,i.ColorB,i.disponible))
+
 
     def rentBeer(self):
+        print("rent beer")
         if (len(self.loginUser) != 0):
 
             selection=self.BeerList.currentItem()
@@ -100,9 +129,22 @@ class IhmFunction(QDialog):
                 selection=selection.text()
                 selection = selection.rstrip('\n')
                 selectionList = selection.split("\t| ")
+                bottleName = selectionList[1]
+
+                for i in self.Belge:
+                    if bottleName == i.Code:
+                        #modifie les valeurs enregistrer pour cette reférence par les nouvelles
+                        i.disponible = str(self.loginUser)
+                        affichage(self,Belge,bordeau)
+                        enregistrer(self)
+
+
+                print("test rentBeer")
+                print(selectionList)
 
 
     def rentWine(self):
+
         if (len(self.loginUser) != 0):
 
             selection=self.WineList.currentItem()
@@ -111,7 +153,20 @@ class IhmFunction(QDialog):
                 #passage d'une variable QListWidgetItem à une chaine de caractère puis à une liste
                 selection=selection.text()
                 selection = selection.rstrip('\n')
-                seletcionList = selection.split("\t| ")
+                selectionList = selection.split("\t| ")
+                bottleName = selectionList[1]
+
+                for i in self.bordeau:
+                    if bottleName == i.Code:
+                        #modifie les valeurs enregistrer pour cette reférence par les nouvelles
+                        i.disponible = str(self.loginUser)
+                        affichage(self,Belge,bordeau)
+                        enregistrer(self)
+
+                print("test rentWine")
+                print(selectionList)
+
+
 
 
     def SaveSub(self):
@@ -163,10 +218,7 @@ class IhmFunction(QDialog):
                 dejaExistant=True
                 self.persAlready.setText("Bienvenu " + login)
                 self.loginName.setText(login)
-        if(not dejaExistant):
-            self.loginUser = login
-
-
+                self.loginUser = login
         file1.close()
 
     def SortWine(self):
@@ -527,9 +579,9 @@ def enregistrer(self):
     fichiertBeer = open('fichTxtBeer.txt','w')
     fichiertWine = open('fichTXTWine.txt','w')
     for i in self.Belge:
-        fichiertBeer.write("{}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(i.Code,i.Country,i.Region,i.Quantity,i.Aroma,i.Savor,i.ColorB))
+        fichiertBeer.write("{}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(i.Code,i.Country,i.Region,i.Quantity,i.Aroma,i.Savor,i.ColorB,i.disponible))
     for p in self.bordeau:
-        fichiertWine.write("{}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW))
+        fichiertWine.write("{}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW,p.disponible))
     fichiertBeer.close
     fichiertWine.close
 
@@ -543,7 +595,8 @@ def ouvrir(self,Belge,bordeau):
     for ligneb in fichiertBeer:
         ligneb = ligneb.rstrip('\n')
         Beerf = ligneb.split('\t| ')
-        self.Belge.append(Beer(Beerf[0],Beerf[1],Beerf[2],Beerf[3],Beerf[4],Beerf[5],Beerf[6]))
+        if len(Beerf) > 5:
+            self.Belge.append(Beer(Beerf[0],Beerf[1],Beerf[2],Beerf[3],Beerf[4],Beerf[5],Beerf[6],Beerf[7]))
     fichiertBeer.close
 
     fichiertWine = open('fichTXTWine.txt','a')
@@ -552,30 +605,33 @@ def ouvrir(self,Belge,bordeau):
     for lignew in fichiertWine:
         lignew = lignew.rstrip('\n')
         Winef = lignew.split('\t| ')
-        self.bordeau.append(Wine(Winef[0],Winef[1],Winef[2],Winef[3],Winef[4],Winef[5],Winef[6],Winef[7]))
+        if len(Winef) >6:
+            self.bordeau.append(Wine(Winef[0],Winef[1],Winef[2],Winef[3],Winef[4],Winef[5],Winef[6],Winef[7],Winef[8]))
     fichiertWine.close
 
 
-def affichage(self,Belge,bordeau):
+def affichage(self,Belge,bordeau, loginUser="available"):
     #afficahge dans Refund
     self.listWidgetRef.clear()
     if len(self.Belge)!=0:
         for i in self.Belge:
-            self.listWidgetRef.addItem("Beer\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(i.Code,i.Country,i.Region,i.Quantity,i.Aroma,i.Savor,i.ColorB))
+            self.listWidgetRef.addItem("Beer\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(i.Code,i.Country,i.Region,i.Quantity,i.Aroma,i.Savor,i.ColorB,i.disponible))
     for p in self.bordeau:
-        self.listWidgetRef.addItem("Wine\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW))
+        self.listWidgetRef.addItem("Wine\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW,p.disponible))
 
     #affichage dans Customer Wine
     self.WineList.clear()
     if len(self.bordeau)!=0:
         for p in self.bordeau:
-            self.WineList.addItem("Wine\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW))
+            if p.disponible == loginUser:
+                self.WineList.addItem("Wine\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(p.Code,p.Country,p.Region,p.Quantity,p.Domain,p.Year,p.Tanin,p.ColorW,p.disponible))
 
     #affichage dans Customer Beer
     self.BeerList.clear()
     if len(self.Belge)!=0:
         for i in self.Belge:
-            self.BeerList.addItem("Beer\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(i.Code,i.Country,i.Region,i.Quantity,i.Aroma,i.Savor,i.ColorB))
+            if i.disponible == loginUser:
+                self.BeerList.addItem("Beer\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\t| {}\n".format(i.Code,i.Country,i.Region,i.Quantity,i.Aroma,i.Savor,i.ColorB,i.disponible))
 
 
 
