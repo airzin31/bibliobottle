@@ -1,0 +1,3 @@
+Beer1	| Country	| Region	| Quantity 	| Aroma	| Savor	| White	| available
+Beer12	| Country	| Region	| Quantity 	| Aroma	| Savor	| White	| available
+Beer123	| Country	| Region	| Quantity 	| Aroma	| Savor	| White	| Last Name

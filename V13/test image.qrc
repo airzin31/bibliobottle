@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>biere vin.jpg</file>
+  </qresource>
+</RCC>
